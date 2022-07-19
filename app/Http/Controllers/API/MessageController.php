@@ -8,9 +8,10 @@ use App\Models\Message;
 use App\Http\Resources\MessageResource;
 use App\Http\Requests\SaveMessageRequest;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\API\ApiController;
 
 
-class MessageController extends Controller
+class MessageController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -69,14 +70,11 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id) : JsonResponse
+    public function destroy(Message $message) : JsonResponse
     {
-    	$message = Message::find($id);
-
         if ($message->is_new && $message->user_id == auth()->user()->id) {
             $message->delete();
-        }
-
-        return $this>successResponse('Message successfully deleted.');
+        return $this->successResponse('Message successfully deleted.');
+        }  else return $this->successResponse('Message not been deleted');
     }
 }
