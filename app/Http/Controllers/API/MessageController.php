@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class MessageController extends Controller
         {
         $messages = Message::with(['user'])->orderByDesc('created_at')->paginate(20);
 
-        return $this->json->successResponse('Messages successfully fetched.', MessageResource::collection($messages));
+        return $this->successResponse('Messages successfully fetched.', MessageResource::collection($messages));
         }
 
     /**
@@ -34,7 +34,7 @@ class MessageController extends Controller
     {
         $message = auth()->user()->messages()->create($request->validated());
 
-        return $this->json->successResponse('Message successfully created.', MessageResource::make($message));
+        return $this->successResponse('Message successfully created.', MessageResource::make($message));
         // return $this->json->successResponse('Message successfully created.', new MessageResource(
         //     Message::create($request->validated()))
         // );
@@ -77,6 +77,6 @@ class MessageController extends Controller
             $message->delete();
         }
 
-        return $this->json->successResponse('Message successfully deleted.');
+        return $this>successResponse('Message successfully deleted.');
     }
 }

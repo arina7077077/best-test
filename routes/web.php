@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get( '/some_url', function () {
+//     return "Token is wrong";
+// }
+// )->name('login');
